@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="zero">0dp</dimen>
+
+    <!-- Home -->
+    <dimen name="corner_radius_search">8dp</dimen>
+    <dimen name="elevation_search">8dp</dimen>
+
+</resources>
