@@ -26,6 +26,13 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField("String", "BASE_URL", "\"https://api.weatherapi.com/\"")
+            buildConfigField("String", "API_KEY", "\"de5553176da64306b86153651221606\"")
+        }
+
+        debug {
+            buildConfigField("String", "BASE_URL", "\"https://api.weatherapi.com/\"")
+            buildConfigField("String", "API_KEY", "\"de5553176da64306b86153651221606\"")
         }
     }
     compileOptions {
@@ -39,6 +46,10 @@ android {
     dataBinding {
         enable = true
     }
+
+    buildFeatures {
+        buildConfig = true
+    }
 }
 
 dependencies {
@@ -50,6 +61,11 @@ dependencies {
     //Navigation
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
+
+    //Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.gson)
+    implementation(libs.logging.interceptor)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
