@@ -2,6 +2,7 @@ package com.alexis.weatherapp.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.alexis.weatherapp.databinding.ActivityMainBinding
@@ -16,9 +17,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        showSplash()
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initUI()
+    }
+
+    private fun showSplash() {
+        installSplashScreen().setKeepOnScreenCondition { false }
     }
 
     private fun initUI() {
