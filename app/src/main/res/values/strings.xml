@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">WeatherApp</string>
     <string name="query_hint">Search here...</string>
+
+    <!-- Home -->
+    <string name="location">Location:</string>
+    <string name="country">Country:</string>
 </resources>

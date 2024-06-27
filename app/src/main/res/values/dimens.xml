@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="zero">0dp</dimen>
+    <dimen name="padding_15">15dp</dimen>
+    <dimen name="margin_15">15dp</dimen>
 
     <!-- Home -->
     <dimen name="corner_radius_search">8dp</dimen>
     <dimen name="elevation_search">8dp</dimen>
+    <dimen name="corner_radius_item">20dp</dimen>
+    <dimen name="elevation_item">5dp</dimen>
+    <dimen name="width_flag_location">150dp</dimen>
+    <dimen name="height_flag_location">150dp</dimen>
 
 </resources>

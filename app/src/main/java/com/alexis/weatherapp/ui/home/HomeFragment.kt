@@ -1,16 +1,83 @@
 package com.alexis.weatherapp.ui.home
 
+import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.alexis.weatherapp.R
 import com.alexis.weatherapp.databinding.FragmentHomeBinding
+import com.alexis.weatherapp.domain.model.Location
+import com.alexis.weatherapp.ui.home.adapter.LocationAdapter
+import com.alexis.weatherapp.ui.util.ResultState
 import com.alexis.weatherapp.ui.util.fragment.BaseFragment
+import com.alexis.weatherapp.ui.util.visibilityGone
+import com.alexis.weatherapp.ui.util.visibilityVisible
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
+    private val locationViewModel: LocationViewModel by activityViewModels()
+    private lateinit var locationAdapter: LocationAdapter
+
     override fun initUI() {
+        initAdapter()
+        initRecycler()
         initListener()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        initStateUI()
+    }
+
+    private fun initStateUI() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                locationViewModel.state.collect {
+                    val progressBar = binding.pbWeather
+                    when (it) {
+                        ResultState.Loading ->{
+                            progressBar.visibilityVisible()
+                            binding.rvWeather.visibilityGone()
+                        }
+
+                        is ResultState.Success -> {
+                            setView(it.data)
+                        }
+
+                        is ResultState.Failure -> {
+                            Log.e("Error", it.exception.message!!)
+                        }
+                    }
+                    if (it != ResultState.Loading) {
+                        progressBar.visibilityGone()
+                    }
+                }
+            }
+        }
+    }
+
+    private fun setView(listLocation: List<Location>) {
+        locationAdapter.updateListLocation(listLocation)
+        binding.rvWeather.visibilityVisible()
+    }
+
+    private fun initAdapter() {
+        locationAdapter = LocationAdapter(onItemClickListener = {
+        })
+    }
+
+    private fun initRecycler() {
+        binding.rvWeather.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = locationAdapter
+        }
     }
 
     private fun initListener() {
@@ -20,6 +87,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
+                if (!newText.isNullOrEmpty()) {
+                    locationViewModel.getLocations(newText)
+                }else{
+                    locationAdapter.updateListLocation(listOf())
+                }
                 return true
             }
         })
