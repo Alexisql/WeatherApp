@@ -1,4 +1,4 @@
-package com.alexis.weatherapp.ui.util
+package com.alexis.weatherapp.ui.di
 
 import dagger.Module
 import dagger.Provides
