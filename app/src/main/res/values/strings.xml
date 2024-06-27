@@ -5,4 +5,14 @@
     <!-- Home -->
     <string name="location">Location:</string>
     <string name="country">Country:</string>
+
+    <!-- Detail -->
+    <string name="degree">º</string>
+
+    <!-- Preview -->
+    <string name="bogota">Bogota</string>
+    <string name="colombia">Colombia</string>
+    <string name="temperature">23</string>
+    <string name="condition">Partly cloudy</string>
+
 </resources>

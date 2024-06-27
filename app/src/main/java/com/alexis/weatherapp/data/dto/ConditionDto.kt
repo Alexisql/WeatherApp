@@ -9,4 +9,4 @@ data class ConditionDto(
 )
 
 fun ConditionDto.toDomain() =
-    Condition(icon, text)
+    Condition(icon.replace("//","https://"), text)

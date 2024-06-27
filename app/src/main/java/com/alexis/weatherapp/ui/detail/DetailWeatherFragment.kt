@@ -6,9 +6,11 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.alexis.weatherapp.R
 import com.alexis.weatherapp.databinding.FragmentDetailWeatherBinding
+import com.alexis.weatherapp.domain.model.Weather
 import com.alexis.weatherapp.ui.util.ResultState
 import com.alexis.weatherapp.ui.util.fragment.BaseFragment
 import com.alexis.weatherapp.ui.util.visibilityGone
@@ -40,13 +42,14 @@ class DetailWeatherFragment :
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 weatherViewModel.state.collect {
-                    val progressBar = binding.pbWeather
+                    val progressBar = binding.pbDetailWeather
                     when (it) {
                         ResultState.Loading -> {
                             progressBar.visibilityVisible()
                         }
 
                         is ResultState.Success -> {
+                            setView(it.data)
                         }
 
                         is ResultState.Failure -> {
@@ -58,6 +61,13 @@ class DetailWeatherFragment :
                     }
                 }
             }
+        }
+    }
+
+    private fun setView(weather: Weather) {
+        binding.apply {
+            this.weather = weather
+            ivBack.setOnClickListener { findNavController().popBackStack() }
         }
     }
 
