@@ -7,6 +7,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alexis.weatherapp.R
 import com.alexis.weatherapp.databinding.FragmentHomeBinding
@@ -42,7 +43,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
                 locationViewModel.state.collect {
                     val progressBar = binding.pbWeather
                     when (it) {
-                        ResultState.Loading ->{
+                        ResultState.Loading -> {
                             progressBar.visibilityVisible()
                             binding.rvWeather.visibilityGone()
                         }
@@ -70,6 +71,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private fun initAdapter() {
         locationAdapter = LocationAdapter(onItemClickListener = {
+            findNavController().navigate(
+                HomeFragmentDirections.actionToDetailWeatherFragment(it)
+            )
         })
     }
 
@@ -89,7 +93,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             override fun onQueryTextChange(newText: String?): Boolean {
                 if (!newText.isNullOrEmpty()) {
                     locationViewModel.getLocations(newText)
-                }else{
+                } else {
                     locationAdapter.updateListLocation(listOf())
                 }
                 return true

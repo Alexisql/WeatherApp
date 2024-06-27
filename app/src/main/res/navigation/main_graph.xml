@@ -9,6 +9,19 @@
         android:id="@+id/homeFragment"
         android:name="com.alexis.weatherapp.ui.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home"/>
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_to_detailWeatherFragment"
+            app:destination="@+id/detailWeatherFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailWeatherFragment"
+        android:name="com.alexis.weatherapp.ui.detail.DetailWeatherFragment"
+        android:label="DetailWeatherFragment">
+        <argument
+            android:name="location"
+            app:argType="string" />
+    </fragment>
 
 </navigation>
