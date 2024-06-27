@@ -1,9 +1,9 @@
 package com.alexis.weatherapp.data.di
 
 import com.alexis.weatherapp.BuildConfig.BASE_URL
-import com.alexis.weatherapp.data.repository.LocationRepositoryImpl
-import com.alexis.weatherapp.data.service.LocationService
-import com.alexis.weatherapp.domain.repository.ILocationRepository
+import com.alexis.weatherapp.data.repository.WeatherRepositoryImpl
+import com.alexis.weatherapp.data.service.WeatherService
+import com.alexis.weatherapp.domain.repository.IWeatherRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -41,13 +41,13 @@ object RemoteModule {
 
     @Singleton
     @Provides
-    fun locationService(retrofit: Retrofit): LocationService {
-        return retrofit.create(LocationService::class.java)
+    fun locationService(retrofit: Retrofit): WeatherService {
+        return retrofit.create(WeatherService::class.java)
     }
 
     @Singleton
     @Provides
-    fun locationRepository(locationService: LocationService): ILocationRepository {
-        return LocationRepositoryImpl(locationService)
+    fun locationRepository(weatherService: WeatherService): IWeatherRepository {
+        return WeatherRepositoryImpl(weatherService)
     }
 }

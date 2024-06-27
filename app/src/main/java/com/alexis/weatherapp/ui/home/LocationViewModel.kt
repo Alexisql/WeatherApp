@@ -3,7 +3,7 @@ package com.alexis.weatherapp.ui.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alexis.weatherapp.domain.model.Location
-import com.alexis.weatherapp.domain.repository.ILocationRepository
+import com.alexis.weatherapp.domain.repository.IWeatherRepository
 import com.alexis.weatherapp.ui.util.ResultState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LocationViewModel @Inject constructor(
-    private val locationRepository: ILocationRepository,
+    private val weatherRepository: IWeatherRepository,
     private val dispatcherIO: CoroutineDispatcher
 ) : ViewModel() {
 
@@ -27,7 +27,7 @@ class LocationViewModel @Inject constructor(
         viewModelScope.launch {
             withContext(dispatcherIO) {
                 _state.value = ResultState.Loading
-                val locations = locationRepository.getLocations(query)
+                val locations = weatherRepository.getLocations(query)
                 locations
                     .onSuccess { _state.value = ResultState.Success(it) }
                     .onFailure { _state.value = ResultState.Failure(it) }
