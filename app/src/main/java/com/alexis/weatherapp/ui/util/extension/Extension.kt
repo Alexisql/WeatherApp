@@ -1,4 +1,4 @@
-package com.alexis.weatherapp.ui.util
+package com.alexis.weatherapp.ui.util.extension
 
 import android.view.View
 

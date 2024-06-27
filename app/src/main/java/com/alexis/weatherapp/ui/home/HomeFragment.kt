@@ -15,8 +15,8 @@ import com.alexis.weatherapp.domain.model.Location
 import com.alexis.weatherapp.ui.home.adapter.LocationAdapter
 import com.alexis.weatherapp.ui.util.ResultState
 import com.alexis.weatherapp.ui.util.fragment.BaseFragment
-import com.alexis.weatherapp.ui.util.visibilityGone
-import com.alexis.weatherapp.ui.util.visibilityVisible
+import com.alexis.weatherapp.ui.util.extension.visibilityGone
+import com.alexis.weatherapp.ui.util.extension.visibilityVisible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -65,7 +65,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     }
 
     private fun setView(listLocation: List<Location>) {
-        locationAdapter.updateListLocation(listLocation)
+        locationAdapter.updateList(listLocation)
         binding.rvWeather.visibilityVisible()
     }
 
@@ -94,7 +94,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
                 if (!newText.isNullOrEmpty()) {
                     locationViewModel.getLocations(newText)
                 } else {
-                    locationAdapter.updateListLocation(listOf())
+                    locationAdapter.updateList(listOf())
                 }
                 return true
             }

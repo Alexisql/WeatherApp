@@ -13,8 +13,8 @@ import com.alexis.weatherapp.databinding.FragmentDetailWeatherBinding
 import com.alexis.weatherapp.domain.model.Weather
 import com.alexis.weatherapp.ui.util.ResultState
 import com.alexis.weatherapp.ui.util.fragment.BaseFragment
-import com.alexis.weatherapp.ui.util.visibilityGone
-import com.alexis.weatherapp.ui.util.visibilityVisible
+import com.alexis.weatherapp.ui.util.extension.visibilityGone
+import com.alexis.weatherapp.ui.util.extension.visibilityVisible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 

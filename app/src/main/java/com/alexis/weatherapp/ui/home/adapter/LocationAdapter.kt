@@ -3,14 +3,12 @@ package com.alexis.weatherapp.ui.home.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.RecyclerView
 import com.alexis.weatherapp.R
 import com.alexis.weatherapp.domain.model.Location
+import com.alexis.weatherapp.ui.util.adapter.BaseAdapter
 
-class LocationAdapter(
-    private var oldListLocation: List<Location> = listOf(),
-    private val onItemClickListener: (String) -> Unit
-) : RecyclerView.Adapter<LocationViewHolder>() {
+class LocationAdapter(private val onItemClickListener: (String) -> Unit) :
+    BaseAdapter<Location, LocationViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LocationViewHolder {
         return LocationViewHolder(
@@ -18,16 +16,14 @@ class LocationAdapter(
         )
     }
 
-    override fun getItemCount(): Int = oldListLocation.size
-
     override fun onBindViewHolder(holder: LocationViewHolder, position: Int) {
-        holder.setView(oldListLocation[position], onItemClickListener)
+        holder.setView(data[position], onItemClickListener)
     }
 
-    fun updateListLocation(newListLocation: List<Location>) {
-        val locationDiff = LocationDiffUtil(oldListLocation, newListLocation)
+    override fun updateList(newList: List<Location>) {
+        val locationDiff = LocationDiffUtil(data, newList)
         val result = DiffUtil.calculateDiff(locationDiff)
-        oldListLocation = newListLocation
+        data = newList
         result.dispatchUpdatesTo(this)
     }
 }
