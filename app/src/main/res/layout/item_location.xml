@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="location"
+            type="com.alexis.weatherapp.domain.model.Location" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_item_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/corner_radius_item"
+            app:cardElevation="@dimen/elevation_item"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tv_title_location"
+                    style="@style/TextLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/padding_15"
+                    android:text="@string/location"
+                    android:textColor="@color/grey"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_name_location"
+                    style="@style/TextLocation"
+                    android:layout_width="@dimen/zero"
+                    android:layout_height="wrap_content"
+                    android:text="@{location.name}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/iv_image_location"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_title_location" />
+
+                <TextView
+                    android:id="@+id/tv_title_country"
+                    style="@style/TextLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/padding_15"
+                    android:text="@string/country"
+                    android:textColor="@color/grey"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_name_location" />
+
+                <TextView
+                    android:id="@+id/tv_name_country"
+                    style="@style/TextLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{location.country}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_title_country" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_image_location"
+                    android:layout_width="@dimen/width_flag_location"
+                    android:layout_height="@dimen/height_flag_location"
+                    android:padding="@dimen/padding_15"
+                    android:src="@drawable/weather"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </FrameLayout>
+</layout>

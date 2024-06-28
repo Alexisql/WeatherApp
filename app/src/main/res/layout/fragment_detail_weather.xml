@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="weather"
+            type="com.alexis.weatherapp.domain.model.Weather" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            android:id="@+id/pb_detail_weather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cv_detail_weather"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardElevation="@dimen/elevation_detail_weather"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/iv_back"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/padding_15"
+                            android:src="@drawable/ic_back"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_name_location"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/padding_15"
+                            android:text="@{weather.location.name}"
+                            android:textSize="@dimen/name_detail_weather"
+                            android:textStyle="bold"
+                            app:drawableStartCompat="@drawable/ic_location"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="@string/bogota" />
+
+                        <TextView
+                            android:id="@+id/tv_name_country"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{weather.location.country}"
+                            android:textColor="@color/grey"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_name_location"
+                            tools:text="@string/colombia" />
+
+                        <LinearLayout
+                            android:id="@+id/linear_degree"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="@dimen/margin_15"
+                            android:layout_marginEnd="@dimen/margin_15"
+                            android:gravity="center_horizontal"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_name_country">
+
+                            <TextView
+                                android:id="@+id/tv_degree"
+                                style="@style/TextDegree"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{Double.toString(weather.current.temp)}"
+                                tools:text="@string/temperature" />
+
+                            <TextView
+                                android:id="@+id/tv_degree_celsius"
+                                style="@style/TextDegree"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/degree" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tv_condition"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/zero"
+                            android:text="@{weather.current.condition.text}"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/name_detail_weather"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/linear_degree"
+                            tools:text="@string/condition" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/iv_image_detail_weather"
+                            android:layout_width="@dimen/width_image_weather_detail"
+                            android:layout_height="@dimen/height_image_weather_detail"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_condition"
+                            app:setImage='@{weather.current.condition.icon??""}'
+                            tools:src="@drawable/weather" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    android:id="@+id/tv_next_forecast_day"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_15"
+                    android:text="@string/title_forecast"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/name_detail_weather"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cv_detail_weather" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_forecastday"
+                    android:layout_width="@dimen/zero"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="@dimen/margin_15"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_next_forecast_day" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

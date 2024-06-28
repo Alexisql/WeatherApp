@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="zero">0dp</dimen>
+    <dimen name="padding_15">15dp</dimen>
+    <dimen name="margin_15">15dp</dimen>
+    <dimen name="margin_10">10dp</dimen>
+    <dimen name="width_12dp">12dp</dimen>
+    <dimen name="height_2dp">2dp</dimen>
+
+    <!-- Home -->
+    <dimen name="corner_radius_search">8dp</dimen>
+    <dimen name="elevation_search">8dp</dimen>
+    <dimen name="corner_radius_item">20dp</dimen>
+    <dimen name="elevation_item">5dp</dimen>
+    <dimen name="width_flag_location">150dp</dimen>
+    <dimen name="height_flag_location">150dp</dimen>
+
+    <!-- Detail -->
+    <dimen name="width_image_weather_detail">200dp</dimen>
+    <dimen name="height_image_weather_detail">200dp</dimen>
+    <dimen name="elevation_detail_weather">10dp</dimen>
+    <dimen name="name_detail_weather">24sp</dimen>
+    <dimen name="degree">100sp</dimen>
+    <dimen name="size_condition_day">50dp</dimen>
+
+</resources>
