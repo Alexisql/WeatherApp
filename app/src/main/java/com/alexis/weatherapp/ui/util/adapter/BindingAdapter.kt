@@ -1,4 +1,4 @@
-package com.alexis.weatherapp.ui.detail.adapter
+package com.alexis.weatherapp.ui.util.adapter
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter

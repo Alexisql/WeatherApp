@@ -9,6 +9,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 
+const val TAG_LOG_ERROR = "Exception"
+
 abstract class BaseFragment<DB : ViewDataBinding>(@LayoutRes private val layoutResId: Int) :
     Fragment() {
 

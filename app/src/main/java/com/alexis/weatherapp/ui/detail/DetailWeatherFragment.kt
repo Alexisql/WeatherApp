@@ -17,6 +17,7 @@ import com.alexis.weatherapp.ui.util.ResultState
 import com.alexis.weatherapp.ui.util.extension.visibilityGone
 import com.alexis.weatherapp.ui.util.extension.visibilityVisible
 import com.alexis.weatherapp.ui.util.fragment.BaseFragment
+import com.alexis.weatherapp.ui.util.fragment.TAG_LOG_ERROR
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -69,7 +70,7 @@ class DetailWeatherFragment :
                         }
 
                         is ResultState.Failure -> {
-                            Log.e("Error", it.exception.message!!)
+                            Log.e(TAG_LOG_ERROR, it.exception.message!!)
                         }
                     }
                     if (it != ResultState.Loading) {

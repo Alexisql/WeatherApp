@@ -38,8 +38,7 @@
                     android:text="@{forecastDay.date}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="34" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv_image_detail_weather"
@@ -58,8 +57,7 @@
                     android:text='@{Double.toString(forecastDay.day.tempMax)}'
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/iv_image_detail_weather"
-                    tools:text="34" />
+                    app:layout_constraintTop_toBottomOf="@+id/iv_image_detail_weather" />
 
                 <TextView
                     android:id="@+id/tv_temp_min"
@@ -68,8 +66,7 @@
                     android:text="@{Double.toString(forecastDay.day.tempMin)}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_temp_max"
-                    tools:text="34" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_temp_max" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
