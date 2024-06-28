@@ -8,13 +8,15 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.alexis.weatherapp.R
 import com.alexis.weatherapp.databinding.FragmentDetailWeatherBinding
 import com.alexis.weatherapp.domain.model.Weather
+import com.alexis.weatherapp.ui.detail.adapter.ForecastDayAdapter
 import com.alexis.weatherapp.ui.util.ResultState
-import com.alexis.weatherapp.ui.util.fragment.BaseFragment
 import com.alexis.weatherapp.ui.util.extension.visibilityGone
 import com.alexis.weatherapp.ui.util.extension.visibilityVisible
+import com.alexis.weatherapp.ui.util.fragment.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -24,9 +26,7 @@ class DetailWeatherFragment :
 
     private val weatherViewModel: DetailWeatherViewModel by activityViewModels()
     private val detailWeatherArgs by navArgs<DetailWeatherFragmentArgs>()
-
-    override fun initUI() {
-    }
+    private lateinit var forecastDayAdapter: ForecastDayAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +36,22 @@ class DetailWeatherFragment :
     override fun onStart() {
         super.onStart()
         weatherViewModel.getWeather(detailWeatherArgs.location, 3)
+    }
+
+    override fun initUI() {
+        initAdapter()
+        initRecycler()
+    }
+
+    override fun initAdapter() {
+        forecastDayAdapter = ForecastDayAdapter()
+    }
+
+    override fun initRecycler() {
+        binding.rvForecastday.apply {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            adapter = forecastDayAdapter
+        }
     }
 
     private fun initStateUI() {
@@ -69,6 +85,7 @@ class DetailWeatherFragment :
             this.weather = weather
             ivBack.setOnClickListener { findNavController().popBackStack() }
         }
+        forecastDayAdapter.updateList(weather.forecast.forecastDay)
     }
 
 }

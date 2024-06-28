@@ -1,19 +1,19 @@
 package com.alexis.weatherapp.ui.util.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.Fragment
 
-abstract class BaseFragment<DB : ViewDataBinding>(@LayoutRes private val layoutResId: Int) : Fragment() {
+abstract class BaseFragment<DB : ViewDataBinding>(@LayoutRes private val layoutResId: Int) :
+    Fragment() {
 
     private lateinit var _binding: DB
     val binding get() = _binding
-    abstract fun initUI()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,5 +27,9 @@ abstract class BaseFragment<DB : ViewDataBinding>(@LayoutRes private val layoutR
         super.onViewCreated(view, savedInstanceState)
         initUI()
     }
+
+    abstract fun initUI()
+    abstract fun initAdapter()
+    abstract fun initRecycler()
 
 }

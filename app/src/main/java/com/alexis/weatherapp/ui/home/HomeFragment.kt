@@ -26,15 +26,30 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private val locationViewModel: LocationViewModel by activityViewModels()
     private lateinit var locationAdapter: LocationAdapter
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        initStateUI()
+    }
+
     override fun initUI() {
         initAdapter()
         initRecycler()
         initListener()
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        initStateUI()
+    override fun initAdapter() {
+        locationAdapter = LocationAdapter(onItemClickListener = {
+            findNavController().navigate(
+                HomeFragmentDirections.actionToDetailWeatherFragment(it)
+            )
+        })
+    }
+
+    override fun initRecycler() {
+        binding.rvWeather.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = locationAdapter
+        }
     }
 
     private fun initStateUI() {
@@ -64,26 +79,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         }
     }
 
-    private fun setView(listLocation: List<Location>) {
-        locationAdapter.updateList(listLocation)
-        binding.rvWeather.visibilityVisible()
-    }
-
-    private fun initAdapter() {
-        locationAdapter = LocationAdapter(onItemClickListener = {
-            findNavController().navigate(
-                HomeFragmentDirections.actionToDetailWeatherFragment(it)
-            )
-        })
-    }
-
-    private fun initRecycler() {
-        binding.rvWeather.apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = locationAdapter
-        }
-    }
-
     private fun initListener() {
         binding.svSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -101,4 +96,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         })
     }
 
+    private fun setView(listLocation: List<Location>) {
+        locationAdapter.updateList(listLocation)
+        binding.rvWeather.visibilityVisible()
+    }
 }
