@@ -8,6 +8,7 @@
 
     <!-- Detail -->
     <string name="degree">º</string>
+    <string name="title_forecast">Next Forecast</string>
 
     <!-- Preview -->
     <string name="bogota">Bogota</string>

@@ -21,5 +21,6 @@
     <dimen name="elevation_detail_weather">10dp</dimen>
     <dimen name="name_detail_weather">24sp</dimen>
     <dimen name="degree">100sp</dimen>
+    <dimen name="size_condition_day">50dp</dimen>
 
 </resources>

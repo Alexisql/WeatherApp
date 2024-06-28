@@ -81,11 +81,12 @@ class DetailWeatherFragment :
     }
 
     private fun setView(weather: Weather) {
+        forecastDayAdapter.updateList(weather.forecast.forecastDay)
         binding.apply {
             this.weather = weather
             ivBack.setOnClickListener { findNavController().popBackStack() }
+            clDetail.visibilityVisible()
         }
-        forecastDayAdapter.updateList(weather.forecast.forecastDay)
     }
 
 }
